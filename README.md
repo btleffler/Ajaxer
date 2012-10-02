@@ -1,7 +1,7 @@
 # Ajaxer
-## Another XMLHttpRequest abstraction
+## Another `XMLHttpRequest` abstraction
 
-If you've ever been stuck using an outdated javascript library without the possiblility of upgrading it, you've probably had trouble with the library's built in ajax helpers. _Trouble no more!_ Ajaxer is made to be a simple to use, browser friendly, XMLHttpRequest abstraction. It supports different request methods, username and password authentication, custom headers, and custom callbacks.
+If you've ever been stuck using an outdated javascript library without the possiblility of upgrading it, you've probably had trouble with the library's built in ajax helpers. _Trouble no more!_ `Ajaxer` is made to be a simple to use, browser friendly, `XMLHttpRequest` abstraction. It supports different request methods, username and password authentication, custom headers, and custom callbacks.
 
 ### Sample Usage
 Make sure that you've loaded `Ajaxer.js` or `Ajaxer.min.js`. There are no other requirements.
