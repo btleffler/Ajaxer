@@ -1,7 +1,8 @@
-/**
+/*
  * Ajaxer
  * Author: Benjamin Leffler <btleffler@gmail.com>
  * Date: 09/28/12
+ * Uses: Cross-Browser XMLHttpRequest Creation by Joshua Eichorn <http://www.informit.com/articles/article.aspx?p=667416&seqNum=2>
  * Licence: MIT - <http://opensource.org/licenses/mit-license.php>
  */
 

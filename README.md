@@ -151,6 +151,9 @@ my_ajax.go({
 });
 ```
 
+## Uses
+[Cross-Browser `XMLHttpRequest` Creation](http://www.informit.com/articles/article.aspx?p=667416&seqNum=2) by [Joshua Eichorn](http://www.informit.com/authors/bio.aspx?a=29e0d4d6-2582-429f-b83b-ea27837fec4c)
+
 ## Licence - MIT
 Copyright (c) 2012 Benjamin Leffler
 
