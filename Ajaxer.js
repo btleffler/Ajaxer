@@ -167,7 +167,7 @@
       } else if (typeof callback !== "undefined") // Pass it on
         return this.addCallback({ when: callback });
 
-        return this;
+      return this;
     },
     "callbacksOnComplete": function callbacksOnComplete (data) {
       var callbacks = this.callbacks.after,
