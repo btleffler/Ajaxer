@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ajaxer : Another XMLHttpRequest Abstraction" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ajaxer</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/btleffler/Ajaxer">View on GitHub</a>
+
+          <h1 id="project_title">Ajaxer</h1>
+          <h2 id="project_tagline">Another XMLHttpRequest Abstraction</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/btleffler/Ajaxer/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/btleffler/Ajaxer/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Ajaxer</h1>
+
+<h2>Another <code>XMLHttpRequest</code> abstraction</h2>
+
+<p>If you've ever been stuck using an outdated javascript library without the possiblility of upgrading it, you've probably had trouble with the library's built in ajax helpers. <em>Trouble no more!</em> <code>Ajaxer</code> is made to be a simple to use, browser friendly, <code>XMLHttpRequest</code> abstraction. It supports different request methods, username and password authentication, custom headers, and custom callbacks.</p>
+
+<h3>Sample Usage</h3>
+
+<p>Make sure that you've loaded <code>Ajaxer.js</code> or <code>Ajaxer.min.js</code>. There are no other requirements.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">my_ajax</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ajaxer</span><span class="p">({</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"/my_ajax/action"</span><span class="p">,</span>
+  <span class="s2">"method"</span><span class="o">:</span> <span class="s2">"PUT"</span><span class="p">,</span>  <span class="c1">// Defaults to POST</span>
+  <span class="s2">"headers"</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// "X-Requested-With: XMLHttpRequest" is in the headers by default</span>
+    <span class="s2">"Super-Secret"</span><span class="o">:</span> <span class="s2">"Keyboard Cat"</span>
+  <span class="p">},</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="s2">"btleffler"</span><span class="p">,</span>
+  <span class="s2">"pass"</span><span class="o">:</span> <span class="s2">"alsoKeyboardCat"</span><span class="p">,</span>
+  <span class="s2">"responseType"</span><span class="o">:</span> <span class="s2">"text"</span><span class="p">,</span> <span class="c1">// Defaults to json</span>
+  <span class="s2">"data"</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// defaults to {}, can also be an array</span>
+    <span class="s2">"just"</span><span class="o">:</span> <span class="s2">"a"</span><span class="p">,</span>
+    <span class="s2">"simple"</span><span class="o">:</span> <span class="s2">"hash"</span>
+  <span class="p">},</span>
+  <span class="s2">"callbacks"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"before"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="kd">function</span> <span class="nx">firstBeforeCallback</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// xhr is the actual XMLHttpRequest object being used for the request</span>
+        <span class="c1">// 'this' is the instance of Ajaxer that's performing the request</span>
+      <span class="p">},</span>
+      <span class="kd">function</span> <span class="nx">secondBeforeCallback</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Same as firstBeforeCallback, but called directly after</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"after"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="kd">function</span> <span class="nx">firstAfterCallback</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Data is the parsed data that comes from the response if there is any</span>
+        <span class="c1">// It tries to default to whatever the responseType is set to</span>
+        <span class="c1">// 'this' is the instance of the Ajaxer that performed the request</span>
+      <span class="p">},</span>
+      <span class="kd">function</span> <span class="nx">secondAfterCallback</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Same as above. Called directly after firstAfterCallback</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Do some more stuff in preparation...</span>
+<span class="cm"> */</span>
+
+<span class="c1">// Set it loose!</span>
+<span class="nx">my_ajax</span><span class="p">.</span><span class="nx">go</span><span class="p">();</span>
+</pre></div>
+
+<h3>Documentation</h3>
+
+<p>All methods are chainable. There's no need to put everything on a separate line, unless you want to.</p>
+
+<h4>createAjaxer([(hash)options])</h4>
+
+<p>If you don't like to use the "new" keyword, or want to chain directly from start, you can use <code>Ajaxer.createAjaxer()</code>.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Same as the example above...</span>
+<span class="p">};</span>
+
+<span class="nx">Ajaxer</span><span class="p">.</span><span class="nx">createAjaxer</span><span class="p">(</span><span class="nx">options</span><span class="p">).</span><span class="nx">go</span><span class="p">();</span>
+</pre></div>
+
+<h3>setData([(mixed)data][, (boolean)reset]) &amp; addData([(mixed)data][, (boolean)reset])</h3>
+
+<p>Add data to the <code>Ajaxer</code> instance after it's been constructed. <code>setData</code> and <code>addData</code> are aliases of the same function.</p>
+
+<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span> <span class="s2">"some"</span><span class="o">:</span> <span class="s2">"data"</span> <span class="p">}).</span><span class="nx">addData</span><span class="p">([</span> <span class="s2">"more"</span><span class="p">,</span> <span class="s2">"data"</span> <span class="p">]);</span>
+</pre></div>
+
+<p>There is an optional second parameter to reset the data in the <code>Ajaxer</code> instance back to <code>{}</code>.</p>
+
+<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span> <span class="s2">"this"</span><span class="o">:</span> <span class="s2">"is"</span><span class="p">,</span> <span class="s2">"all"</span><span class="o">:</span> <span class="s2">"the"</span><span class="p">,</span> <span class="s2">"data"</span><span class="o">:</span> <span class="s2">"now"</span> <span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div>
+
+<h3>setHeaders([(hash)headers][, reset])</h3>
+
+<p>Add to the headers of the request. Works the same as <code>setData</code> and <code>addData</code>, except that it only accepts a hash.</p>
+
+<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setHeaders</span><span class="p">({</span>
+  <span class="s2">"X-Requested-With"</span><span class="o">:</span> <span class="s2">"Not XMLHttpRequest because I'm sneaky."</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>Callbacks</h3>
+
+<p>There are two times callbacks are called with <code>Ajaxer</code>, just before the request is send, and just after we get a response.</p>
+
+<h4>addCallback([(mixed) callback])</h4>
+
+<p><code>addCallback()</code> allows you to add "before" and "after" callbacks at the same time. If you don't specify before or after, it will default to "after."</p>
+
+<div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> * Assume 'func1-10', etc are actual functions</span>
+<span class="cm"> */</span>
+
+<span class="c1">// Add both</span>
+<span class="nx">my_ajax</span><span class="p">.</span><span class="nx">addCallback</span><span class="p">({</span>
+  <span class="s2">"before"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">func1</span><span class="p">,</span>
+    <span class="nx">func2</span><span class="p">,</span>
+    <span class="nx">func3</span>
+  <span class="p">],</span>
+  <span class="s2">"after"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">func4</span><span class="p">,</span>
+    <span class="nx">func5</span><span class="p">,</span>
+    <span class="nx">func6</span>
+  <span class="p">]</span>
+<span class="p">});</span>
+
+<span class="c1">// Only add for "after"</span>
+<span class="nx">my_ajax</span><span class="p">.</span><span class="nx">addCallback</span><span class="p">([</span> <span class="nx">func7</span><span class="p">,</span> <span class="nx">func8</span><span class="p">,</span> <span class="nx">func9</span> <span class="p">]);</span>
+<span class="nx">my_ajax</span><span class="p">.</span><span class="nx">addCallback</span><span class="p">(</span><span class="nx">func10</span><span class="p">);</span>
+</pre></div>
+
+<h4>beforeSend([(mixed) callback])</h4>
+
+<p>Add a callback, or multiple callbacks to be called before the request is sent.</p>
+
+<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">beforeSend</span><span class="p">([</span>
+  <span class="nx">doThisBefore</span><span class="p">,</span>
+  <span class="nx">alsoDoThis</span>
+<span class="p">]);</span>
+
+<span class="nx">my_ajax</span><span class="p">.</span><span class="nx">beforeSend</span><span class="p">(</span><span class="nx">dontForgetThisToo</span><span class="p">);</span>
+</pre></div>
+
+<h4>onComplete([(mixed) callback])</h4>
+
+<p>Same as <code>beforeSend()</code> but for callbacks that are called after we get a response.</p>
+
+<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">onComplete</span><span class="p">([</span>
+  <span class="nx">doStuffWithData</span><span class="p">,</span>
+  <span class="nx">doMoreWork</span>
+<span class="p">]);</span>
+
+<span class="nx">my_ajax</span><span class="p">.</span><span class="nx">onComplete</span><span class="p">(</span><span class="nx">thereIsStillMoreWork</span><span class="p">);</span>
+</pre></div>
+
+<h3>go([(mixed) callback])</h3>
+
+<p>Initiates and sends the request and calls the callbacks. <code>go()</code> can also take an optional parameter of callbacks the same way <code>addCallback()</code> works.</p>
+
+<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">go</span><span class="p">({</span>
+  <span class="s2">"before"</span><span class="o">:</span> <span class="p">[</span> <span class="nx">almostForgotToDoThis</span> <span class="p">],</span>
+  <span class="s2">"after"</span><span class="o">:</span> <span class="p">[</span> <span class="nx">weCantForgetAboutThisEither</span> <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>Uses</h2>
+
+<p><a href="http://www.informit.com/articles/article.aspx?p=667416&amp;seqNum=2">Cross-Browser <code>XMLHttpRequest</code> Creation</a> by <a href="http://www.informit.com/authors/bio.aspx?a=29e0d4d6-2582-429f-b83b-ea27837fec4c">Joshua Eichorn</a></p>
+
+<h2>Licence - MIT</h2>
+
+<p>Copyright (c) 2012 Benjamin Leffler</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ajaxer maintained by <a href="https://github.com/btleffler">btleffler</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("67033484");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
