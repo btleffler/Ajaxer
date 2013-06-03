@@ -88,7 +88,7 @@ my_ajax.setHeaders({
 ```
 
 ### Callbacks
-There are two times callbacks are called with `Ajaxer`, just before the request is send, and just after we get a response.
+There are two times callbacks are called with `Ajaxer`, just before the request is sent, and just after we get a response.
 
 #### addCallback([(mixed) callback])
 `addCallback()` allows you to add "before" and "after" callbacks at the same time. If you don't specify before or after, it will default to "after."
