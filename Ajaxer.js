@@ -159,13 +159,19 @@
       }
     },
     "addCallback": function helperAddCallback (callback, when) {
+      var o;
       // Add a callback to before or after
       if (typeof callback === "function") {
         // If it's one function, great.
         this.callbacks[when].push(callback);
         return this;
-      } else if (typeof callback !== "undefined") // Pass it on
-        return this.addCallback({ when: callback });
+      } else if (typeof callback !== "undefined") {
+        // Pass it on
+        o = {};
+        o[when] = callback;
+        
+        return this.addCallback(o); 
+      }
 
       return this;
     },
