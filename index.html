@@ -31,13 +31,16 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>Ajaxer</h1>
+        <h1>
+<a name="ajaxer" class="anchor" href="#ajaxer"><span class="octicon octicon-link"></span></a>Ajaxer</h1>
 
-<h2>Another <code>XMLHttpRequest</code> abstraction</h2>
+<h2>
+<a name="another-xmlhttprequest-abstraction" class="anchor" href="#another-xmlhttprequest-abstraction"><span class="octicon octicon-link"></span></a>Another <code>XMLHttpRequest</code> abstraction</h2>
 
 <p>If you've ever been stuck using an outdated javascript library without the possiblility of upgrading it, you've probably had trouble with the library's built in ajax helpers. <em>Trouble no more!</em> <code>Ajaxer</code> is made to be a simple to use, browser friendly, <code>XMLHttpRequest</code> abstraction. It supports different request methods, username and password authentication, custom headers, and custom callbacks.</p>
 
-<h3>Sample Usage</h3>
+<h3>
+<a name="sample-usage" class="anchor" href="#sample-usage"><span class="octicon octicon-link"></span></a>Sample Usage</h3>
 
 <p>Make sure that you've loaded <code>Ajaxer.js</code> or <code>Ajaxer.min.js</code>. There are no other requirements.</p>
 
@@ -85,11 +88,13 @@
 <span class="nx">my_ajax</span><span class="p">.</span><span class="nx">go</span><span class="p">();</span>
 </pre></div>
 
-<h3>Documentation</h3>
+<h3>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h3>
 
 <p>All methods are chainable. There's no need to put everything on a separate line, unless you want to.</p>
 
-<h4>createAjaxer([(hash)options])</h4>
+<h4>
+<a name="createajaxerhashoptions" class="anchor" href="#createajaxerhashoptions"><span class="octicon octicon-link"></span></a>createAjaxer([(hash)options])</h4>
 
 <p>If you don't like to use the "new" keyword, or want to chain directly from start, you can use <code>Ajaxer.createAjaxer()</code>.</p>
 
@@ -100,7 +105,8 @@
 <span class="nx">Ajaxer</span><span class="p">.</span><span class="nx">createAjaxer</span><span class="p">(</span><span class="nx">options</span><span class="p">).</span><span class="nx">go</span><span class="p">();</span>
 </pre></div>
 
-<h3>setData([(mixed)data][, (boolean)reset]) &amp; addData([(mixed)data][, (boolean)reset])</h3>
+<h3>
+<a name="setdatamixeddata-booleanreset--adddatamixeddata-booleanreset" class="anchor" href="#setdatamixeddata-booleanreset--adddatamixeddata-booleanreset"><span class="octicon octicon-link"></span></a>setData([(mixed)data][, (boolean)reset]) &amp; addData([(mixed)data][, (boolean)reset])</h3>
 
 <p>Add data to the <code>Ajaxer</code> instance after it's been constructed. <code>setData</code> and <code>addData</code> are aliases of the same function.</p>
 
@@ -112,7 +118,8 @@
 <div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span> <span class="s2">"this"</span><span class="o">:</span> <span class="s2">"is"</span><span class="p">,</span> <span class="s2">"all"</span><span class="o">:</span> <span class="s2">"the"</span><span class="p">,</span> <span class="s2">"data"</span><span class="o">:</span> <span class="s2">"now"</span> <span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
 </pre></div>
 
-<h3>setHeaders([(hash)headers][, reset])</h3>
+<h3>
+<a name="setheadershashheaders-reset" class="anchor" href="#setheadershashheaders-reset"><span class="octicon octicon-link"></span></a>setHeaders([(hash)headers][, reset])</h3>
 
 <p>Add to the headers of the request. Works the same as <code>setData</code> and <code>addData</code>, except that it only accepts a hash.</p>
 
@@ -121,11 +128,13 @@
 <span class="p">});</span>
 </pre></div>
 
-<h3>Callbacks</h3>
+<h3>
+<a name="callbacks" class="anchor" href="#callbacks"><span class="octicon octicon-link"></span></a>Callbacks</h3>
 
-<p>There are two times callbacks are called with <code>Ajaxer</code>, just before the request is send, and just after we get a response.</p>
+<p>There are two times callbacks are called with <code>Ajaxer</code>, just before the request is sent, and just after we get a response.</p>
 
-<h4>addCallback([(mixed) callback])</h4>
+<h4>
+<a name="addcallbackmixed-callback" class="anchor" href="#addcallbackmixed-callback"><span class="octicon octicon-link"></span></a>addCallback([(mixed) callback])</h4>
 
 <p><code>addCallback()</code> allows you to add "before" and "after" callbacks at the same time. If you don't specify before or after, it will default to "after."</p>
 
@@ -152,7 +161,8 @@
 <span class="nx">my_ajax</span><span class="p">.</span><span class="nx">addCallback</span><span class="p">(</span><span class="nx">func10</span><span class="p">);</span>
 </pre></div>
 
-<h4>beforeSend([(mixed) callback])</h4>
+<h4>
+<a name="beforesendmixed-callback" class="anchor" href="#beforesendmixed-callback"><span class="octicon octicon-link"></span></a>beforeSend([(mixed) callback])</h4>
 
 <p>Add a callback, or multiple callbacks to be called before the request is sent.</p>
 
@@ -164,7 +174,8 @@
 <span class="nx">my_ajax</span><span class="p">.</span><span class="nx">beforeSend</span><span class="p">(</span><span class="nx">dontForgetThisToo</span><span class="p">);</span>
 </pre></div>
 
-<h4>onComplete([(mixed) callback])</h4>
+<h4>
+<a name="oncompletemixed-callback" class="anchor" href="#oncompletemixed-callback"><span class="octicon octicon-link"></span></a>onComplete([(mixed) callback])</h4>
 
 <p>Same as <code>beforeSend()</code> but for callbacks that are called after we get a response.</p>
 
@@ -176,7 +187,8 @@
 <span class="nx">my_ajax</span><span class="p">.</span><span class="nx">onComplete</span><span class="p">(</span><span class="nx">thereIsStillMoreWork</span><span class="p">);</span>
 </pre></div>
 
-<h3>go([(mixed) callback])</h3>
+<h3>
+<a name="gomixed-callback" class="anchor" href="#gomixed-callback"><span class="octicon octicon-link"></span></a>go([(mixed) callback])</h3>
 
 <p>Initiates and sends the request and calls the callbacks. <code>go()</code> can also take an optional parameter of callbacks the same way <code>addCallback()</code> works.</p>
 
@@ -186,11 +198,13 @@
 <span class="p">});</span>
 </pre></div>
 
-<h2>Uses</h2>
+<h2>
+<a name="uses" class="anchor" href="#uses"><span class="octicon octicon-link"></span></a>Uses</h2>
 
 <p><a href="http://www.informit.com/articles/article.aspx?p=667416&amp;seqNum=2">Cross-Browser <code>XMLHttpRequest</code> Creation</a> by <a href="http://www.informit.com/authors/bio.aspx?a=29e0d4d6-2582-429f-b83b-ea27837fec4c">Joshua Eichorn</a></p>
 
-<h2>Licence - MIT</h2>
+<h2>
+<a name="license---mit" class="anchor" href="#license---mit"><span class="octicon octicon-link"></span></a>License - MIT</h2>
 
 <p>Copyright (c) 2012 Benjamin Leffler</p>
 
