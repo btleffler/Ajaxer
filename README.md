@@ -154,7 +154,7 @@ my_ajax.go({
 ## Uses
 [Cross-Browser `XMLHttpRequest` Creation](http://www.informit.com/articles/article.aspx?p=667416&seqNum=2) by [Joshua Eichorn](http://www.informit.com/authors/bio.aspx?a=29e0d4d6-2582-429f-b83b-ea27837fec4c)
 
-## Licence - MIT
+## License - MIT
 Copyright (c) 2012 Benjamin Leffler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
