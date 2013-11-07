@@ -282,6 +282,14 @@
     // Chain
     return this;
   };
+  
+  Ajaxer.getXMLHttp = function getXMLHttp () {
+    if (Ajaxer.ajaxObject === "XMLHttpRequest")
+      return new XMLHttpRequest();
+    else {
+      return new ActiveXObject(Ajaxer.ActiveXObjectId);
+    }
+  };
 
   /*
    * Ajaxer prototype methods
@@ -370,14 +378,6 @@
 
   proto.onComplete = function onComplete (callback) {
     return p.addCallback.call(this, callback, "after");
-  };
-  
-  proto.getXMLHttp = function getXMLHttp () {
-    if (Ajaxer.ajaxObject === "XMLHttpRequest")
-      return new XMLHttpRequest();
-    else {
-      return new ActiveXObject(Ajaxer.ActiveXObjectId);
-    }
   };
 
   proto.go = function go (callback) {
