@@ -2,14 +2,14 @@
  * Ajaxer
  * Author: Benjamin Leffler <btleffler@gmail.com>
  * Date: 09/28/12
- * Uses: Cross-Browser XMLHttpRequest Creation by Joshua Eichorn <http://www.informit.com/articles/article.aspx?p=667416&seqNum=2>
  * Licence: MIT - <http://opensource.org/licenses/mit-license.php>
  */
 
-(function setupAjaxer (w) {
+(function setupAjaxer () {
   "use strict";
   var proto = {},
-    s, h, p;
+    w = Function("return this")(),
+    oldErrorHandler, s, h, p, Ajaxer;
 
   /*
    * "Static" stuff
@@ -19,7 +19,15 @@
       "HEAD", "GET", "POST", "PUT", "DELETE",
       "TRACE", "OPTIONS", "CONNECT", "PATCH"
     ],
-    "useFormData": typeof w.FormData !== "undefined"
+    "useFormData": typeof w.FormData !== "undefined",
+    "ActiveXObjectIds": [
+      "XMLHttpRequest", // Not really, but whatever
+      "MSXML2.XMLHTTP.5.0",
+      "MSXML2.XMLHTTP.4.0",
+      "MSXML2.XMLHTTP.3.0",
+      "MSXML2.XMLHTTP",
+      "Microsoft.XMLHTTP"
+    ]
   };
 
   /*
@@ -35,37 +43,34 @@
         console.warn(wrn);
       }
     },
-    /*
-     * By Joshua Eichorn:
-     * http://www.informit.com/articles/article.aspx?p=667416&seqNum=2
-     * http://www.informit.com/authors/bio.aspx?a=29e0d4d6-2582-429f-b83b-ea27837fec4c
-     */
-    "getXMLHttp": function getXMLHttp () {
-      var ids = [
-          "MSXML2.XMLHTTP.5.0",
-          "MSXML2.XMLHTTP.4.0",
-          "MSXML2.XMLHTTP.3.0",
-          "MSXML2.XMLHTTP",
-          "Microsoft.XMLHTTP"
-        ],
-        len = ids.length,
-        i = 0,
-        obj;
-
-      try {
-        obj = new XMLHttpRequest();
-        return obj;
-      } catch (err1) {
-        for (; i < len; i++) {
-          try {
-            obj = new ActiveXObject(ids[i]);
-            return obj;
-          } catch (err2) { /* Really don't even care */ }
-        }
-
-        // If it got all the way through the loop, there is no Ajax support
+    "getAjaxErrorHandler": function getAjaxErrorHandler () {
+      h.tryXMLHttp(); // Keep trying to find a supported Ajax object
+    },
+    "tryXMLHttp": function tryXMLHttp () {
+      var id;
+      
+      // If we've tried every Ajax option, Ajax isn't supported
+      if (!s.ActiveXObjectIds.length) {
+        // Reset the error handler
+        if (w.addEventListener)
+          w.removeEventListener("error", h.getAjaxErrorHandler, false);
+        else
+          w.onerror = oldErrorHandler;
+        
         h.error("Ajax is not supported.");
+        
+        return;
       }
+      
+      id = s.ActiveXObjectIds.shift();
+      
+      if (id !== "XMLHttpRequest") {
+        new ActiveXObject(id);
+        Ajaxer.ActiveXObjectId = id;
+      } else
+        new XMLHttpRequest();
+      
+      Ajaxer.ajaxObject = id === "XMLHttpRequest" ? id : "ActiveXObject";
     },
     "getHttpVerb": function getHttpVerb (method) {
       var verbs = s.httpVerbs,
@@ -225,7 +230,7 @@
   /*
    * Ajaxer
    */
-  function Ajaxer (options) {
+  Ajaxer = function Ajaxer (options) {
     // Defaults
     this.options = options;
     this.url = "";
@@ -276,7 +281,7 @@
 
     // Chain
     return this;
-  }
+  };
 
   /*
    * Ajaxer prototype methods
@@ -366,9 +371,17 @@
   proto.onComplete = function onComplete (callback) {
     return p.addCallback.call(this, callback, "after");
   };
+  
+  proto.getXMLHttp = function getXMLHttp () {
+    if (Ajaxer.ajaxObject === "XMLHttpRequest")
+      return new XMLHttpRequest();
+    else {
+      return new ActiveXObject(Ajaxer.ActiveXObjectId);
+    }
+  };
 
   proto.go = function go (callback) {
-    var xhr = h.getXMLHttp(),
+    var xhr = this.getXMLHttp(),
       callbacks = this.callbacks.before,
       len = callbacks.length,
       i = 0,
@@ -418,6 +431,19 @@
    * Setup prototype methods
    */
   Ajaxer.prototype = proto;
+  
+  /*
+   * Figure out the ajax object we'll be using
+   */
+  if (w.addEventListener)
+    w.addEventListener("error", h.getAjaxErrorHandler, false);
+  else {
+    oldErrorHandler = w.onerror;
+    w.onerror = h.getAjaxErrorHandler;
+  }
+  
+  // Start trying to figure out what ajax method is supported
+  h.tryXMLHttp();
 
   /*
    * Export
@@ -426,4 +452,4 @@
   if (typeof w.Ajaxer === "undefined") {
     w.Ajaxer = Ajaxer;
   }
-})(window);
+})();
