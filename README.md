@@ -31,12 +31,12 @@ var my_ajax = new Ajaxer({
       }
     ],
     "after": [
-      function firstAfterCallback (data) {
+      function firstAfterCallback (data, xhr) {
         // Data is the parsed data that comes from the response if there is any
         // It tries to default to whatever the responseType is set to
         // 'this' is the instance of the Ajaxer that performed the request
       },
-      function secondAfterCallback (data) {
+      function secondAfterCallback (data, xhr) {
         // Same as above. Called directly after firstAfterCallback
       }
     ]
