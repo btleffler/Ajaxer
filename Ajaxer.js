@@ -46,17 +46,18 @@
     "getAjaxErrorHandler": function getAjaxErrorHandler () {
       h.tryXMLHttp(); // Keep trying to find a supported Ajax object
     },
+    "resetErrorHandler": function resetErrorHandler () {
+      if (w.addEventListener)
+        w.removeEventListener("error", h.getAjaxErrorHandler, false);
+      else
+        w.onerror = oldErrorHandler;
+    },
     "tryXMLHttp": function tryXMLHttp () {
       var id;
       
       // If we've tried every Ajax option, Ajax isn't supported
       if (!s.ActiveXObjectIds.length) {
-        // Reset the error handler
-        if (w.addEventListener)
-          w.removeEventListener("error", h.getAjaxErrorHandler, false);
-        else
-          w.onerror = oldErrorHandler;
-        
+        h.resetErrorHandler();        
         h.error("Ajax is not supported.");
         
         return;
@@ -71,6 +72,8 @@
         new XMLHttpRequest();
       
       Ajaxer.ajaxObject = id === "XMLHttpRequest" ? id : "ActiveXObject";
+      
+      h.resetErrorHandler();
     },
     "getHttpVerb": function getHttpVerb (method) {
       var verbs = s.httpVerbs,
@@ -180,13 +183,13 @@
 
       return this;
     },
-    "callbacksOnComplete": function callbacksOnComplete (data) {
+    "callbacksOnComplete": function callbacksOnComplete (data, xhr) {
       var callbacks = this.callbacks.after,
         len = callbacks.length,
         i = 0;
 
       for (; i < len; i++) {
-        if (callbacks[i].call(this, data) === false) {
+        if (callbacks[i].call(this, data, xhr) === false) {
           break;
         }
       }
@@ -198,15 +201,13 @@
         var data;
 
         if (self.readyState === 4) {
-          if (self.satus === 200) {
-            ajaxer.responses.push(self.responseText);
-            data = self.response || self.responseXML;
+          ajaxer.responses.push(self.responseText);
+          data = self.response || self.responseXML;
 
-            if (!data)
-              data = h.parseJSON(self.responseText);
+          if (!data)
+            data = h.parseJSON(self.responseText);
 
-            p.callbacksOnComplete.call(ajaxer, data);
-          }
+          p.callbacksOnComplete.call(ajaxer, data, self);
         }
       };
     },
@@ -381,7 +382,7 @@
   };
 
   proto.go = function go (callback) {
-    var xhr = this.getXMLHttp(),
+    var xhr = Ajaxer.getXMLHttp(),
       callbacks = this.callbacks.before,
       len = callbacks.length,
       i = 0,
@@ -400,7 +401,7 @@
     }
 
     // Set up the event listeners on the xhr object
-    xhr.addEventListener("readystatechange", p.readyStateChange(this));
+    xhr.addEventListener("readystatechange", p.readyStateChange.call(xhr, this), false);
 
     // Initialize request
     xhr.open(this.method, this.url, true, this.userName, this.password);
