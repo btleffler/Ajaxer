@@ -44,7 +44,7 @@
 
 <p>Make sure that you've loaded <code>Ajaxer.js</code> or <code>Ajaxer.min.js</code>. There are no other requirements.</p>
 
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">my_ajax</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ajaxer</span><span class="p">({</span>
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">my_ajax</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ajaxer</span><span class="p">({</span>
   <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"/my_ajax/action"</span><span class="p">,</span>
   <span class="s2">"method"</span><span class="o">:</span> <span class="s2">"PUT"</span><span class="p">,</span>  <span class="c1">// Defaults to POST</span>
   <span class="s2">"headers"</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// "X-Requested-With: XMLHttpRequest" is in the headers by default</span>
@@ -98,7 +98,7 @@
 
 <p>If you don't like to use the "new" keyword, or want to chain directly from start, you can use <code>Ajaxer.createAjaxer()</code>.</p>
 
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
   <span class="c1">// Same as the example above...</span>
 <span class="p">};</span>
 
@@ -110,12 +110,12 @@
 
 <p>Add data to the <code>Ajaxer</code> instance after it's been constructed. <code>setData</code> and <code>addData</code> are aliases of the same function.</p>
 
-<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span> <span class="s2">"some"</span><span class="o">:</span> <span class="s2">"data"</span> <span class="p">}).</span><span class="nx">addData</span><span class="p">([</span> <span class="s2">"more"</span><span class="p">,</span> <span class="s2">"data"</span> <span class="p">]);</span>
+<div class="highlight highlight-js"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span> <span class="s2">"some"</span><span class="o">:</span> <span class="s2">"data"</span> <span class="p">}).</span><span class="nx">addData</span><span class="p">([</span> <span class="s2">"more"</span><span class="p">,</span> <span class="s2">"data"</span> <span class="p">]);</span>
 </pre></div>
 
 <p>There is an optional second parameter to reset the data in the <code>Ajaxer</code> instance back to <code>{}</code>.</p>
 
-<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span> <span class="s2">"this"</span><span class="o">:</span> <span class="s2">"is"</span><span class="p">,</span> <span class="s2">"all"</span><span class="o">:</span> <span class="s2">"the"</span><span class="p">,</span> <span class="s2">"data"</span><span class="o">:</span> <span class="s2">"now"</span> <span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span> <span class="s2">"this"</span><span class="o">:</span> <span class="s2">"is"</span><span class="p">,</span> <span class="s2">"all"</span><span class="o">:</span> <span class="s2">"the"</span><span class="p">,</span> <span class="s2">"data"</span><span class="o">:</span> <span class="s2">"now"</span> <span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
 </pre></div>
 
 <h3>
@@ -123,7 +123,7 @@
 
 <p>Add to the headers of the request. Works the same as <code>setData</code> and <code>addData</code>, except that it only accepts a hash.</p>
 
-<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setHeaders</span><span class="p">({</span>
+<div class="highlight highlight-js"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">setHeaders</span><span class="p">({</span>
   <span class="s2">"X-Requested-With"</span><span class="o">:</span> <span class="s2">"Not XMLHttpRequest because I'm sneaky."</span>
 <span class="p">});</span>
 </pre></div>
@@ -138,7 +138,7 @@
 
 <p><code>addCallback()</code> allows you to add "before" and "after" callbacks at the same time. If you don't specify before or after, it will default to "after."</p>
 
-<div class="highlight"><pre><span class="cm">/*</span>
+<div class="highlight highlight-js"><pre><span class="cm">/*</span>
 <span class="cm"> * Assume 'func1-10', etc are actual functions</span>
 <span class="cm"> */</span>
 
@@ -166,7 +166,7 @@
 
 <p>Add a callback, or multiple callbacks to be called before the request is sent.</p>
 
-<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">beforeSend</span><span class="p">([</span>
+<div class="highlight highlight-js"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">beforeSend</span><span class="p">([</span>
   <span class="nx">doThisBefore</span><span class="p">,</span>
   <span class="nx">alsoDoThis</span>
 <span class="p">]);</span>
@@ -179,7 +179,7 @@
 
 <p>Same as <code>beforeSend()</code> but for callbacks that are called after we get a response.</p>
 
-<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">onComplete</span><span class="p">([</span>
+<div class="highlight highlight-js"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">onComplete</span><span class="p">([</span>
   <span class="nx">doStuffWithData</span><span class="p">,</span>
   <span class="nx">doMoreWork</span>
 <span class="p">]);</span>
@@ -192,7 +192,7 @@
 
 <p>Initiates and sends the request and calls the callbacks. <code>go()</code> can also take an optional parameter of callbacks the same way <code>addCallback()</code> works.</p>
 
-<div class="highlight"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">go</span><span class="p">({</span>
+<div class="highlight highlight-js"><pre><span class="nx">my_ajax</span><span class="p">.</span><span class="nx">go</span><span class="p">({</span>
   <span class="s2">"before"</span><span class="o">:</span> <span class="p">[</span> <span class="nx">almostForgotToDoThis</span> <span class="p">],</span>
   <span class="s2">"after"</span><span class="o">:</span> <span class="p">[</span> <span class="nx">weCantForgetAboutThisEither</span> <span class="p">]</span>
 <span class="p">});</span>
@@ -223,14 +223,18 @@
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-28572873-2', 'btleffler.github.io');
-      ga('send', 'pageview');
-    </script>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-49098224-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
   </body>
 </html>
